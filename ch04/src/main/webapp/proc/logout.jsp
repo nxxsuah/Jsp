@@ -4,6 +4,10 @@
 	session.removeAttribute("sessUser");
 	session.invalidate(); // 세션 종료
 	
+	Cookie cookie = new Cookie ("auto", null);
+	cookie.setMaxAge(0);
+	response.addCookie(cookie);
+	
 	//로그인 페이지 이동
 	response.sendRedirect("./loginForm.jsp?logout=success");	
 %>

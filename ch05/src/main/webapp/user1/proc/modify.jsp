@@ -24,12 +24,17 @@
 		Connection conn = DriverManager.getConnection(host, user, pass);
 
 		// 3) SQL 실행 객체 생성
-		String sql = "INSERT INTO `User1` VALUES (?,?,?,?)";
+		String sql = "UPDATE `User1` SET ";
+		sql += "name=?,";
+		sql += "hp=?,";
+		sql += "age=? ";
+		sql += "WHERE userid=?";
+		
 		PreparedStatement psmt = conn.prepareStatement(sql);
-		psmt.setString(1, userid);
-		psmt.setString(2, name);
-		psmt.setString(3, hp);
-		psmt.setString(4, age); // 21, '21'
+		psmt.setString(1, name);
+		psmt.setString(2, hp);
+		psmt.setString(3, age);
+		psmt.setString(4, userid);
 
 		// 4) SQL 실행
 		psmt.executeUpdate();
@@ -43,5 +48,5 @@
 	}
 	
 	// 목록 이동
-	response.sendRedirect("/ch05/user1/list.jsp?register=success");
+	response.sendRedirect("/ch05/user1/list.jsp?modify=success");
 %>

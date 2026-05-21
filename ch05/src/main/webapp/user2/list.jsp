@@ -1,6 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="sub1.User1"%>
+<%@page import="sub1.User2"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Statement"%>
@@ -9,7 +9,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
 	// 목록 출력 리스트
-	List<User1> user1List = new ArrayList<>(); 
+	List<User2> user2List = new ArrayList<>(); 
 	
 	//--------------------------------
 	// 데이터베이스 작업
@@ -29,19 +29,19 @@
 		Statement stmt = conn.createStatement();
 
 		// 4) SQL 실행
-		String sql = "SELECT * FROM `User1`";
+		String sql = "SELECT * FROM `User2`";
 		ResultSet rs = stmt.executeQuery(sql);
 
 		// 5) 결과셋(ResultSet) 처리
 		while(rs.next()){
 			
-			User1 user1 = new User1();
-			user1.setUserid(rs.getString(1));
-			user1.setName(rs.getString(2));
-			user1.setHp(rs.getString(3));
-			user1.setAge(rs.getInt(4));
+			User2 user2 = new User2();
+			user2.setUserid(rs.getString(1));
+			user2.setName(rs.getString(2));
+			user2.setBirth(rs.getString(3));
+			user2.setAddr(rs.getString(4));
 			
-			user1List.add(user1);
+			user2List.add(user2);
 		}
 
 		// 6) 데이터베이스 종료
@@ -60,28 +60,28 @@
 		<title>user1::목록</title>
 	</head>
 	<body>
-		<h3>User1 목록</h3>
+		<h3>User2 목록</h3>
 		<a href="/ch05/1_jdbc.jsp">메인</a>
-		<a href="/ch05/user1/register.jsp">등록</a>
+		<a href="/ch05/user2/register.jsp">등록</a>
 		<table border="1">
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
 				<th>생년월일</th>
-				<th>나이</th>
+				<th>주소</th>
 				<th>관리</th>
 			</tr>
 			<% 
-				for(User1 user1 : user1List){
+				for(User2 user2 : user2List){
 			%>
 				<tr>
-					<td><%= user1.getUserid() %></td>
-					<td><%= user1.getName() %></td>
-					<td><%= user1.getHp() %></td>
-					<td><%= user1.getAge() %></td>
+					<td><%= user2.getUserid() %></td>
+					<td><%= user2.getName() %></td>
+					<td><%= user2.getBirth() %></td>
+					<td><%= user2.getAddr() %></td>
 					<td>
-						<a href="/ch05/user1/modify.jsp?userid=<%= user1.getUserid() %>">수정</a>
-						<a href="/ch05/user1/proc/delete.jsp?userid=<%= user1.getUserid() %>">삭제</a>
+						<a href="/ch05/user2/modify.jsp?userid=<%= user2.getUserid() %>">수정</a>
+						<a href="/ch05/user2/proc/delete.jsp?userid=<%= user2.getUserid() %>">삭제</a>
 					</td>
 				</tr>
 			<%

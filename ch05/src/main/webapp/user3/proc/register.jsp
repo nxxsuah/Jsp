@@ -6,8 +6,9 @@
 	// 전송 데이터 수신
 	String userid 	= request.getParameter("userid");
 	String name 	= request.getParameter("name");
-	String hp 		= request.getParameter("hp");
-	String age 		= request.getParameter("age");
+	String birth	= request.getParameter("birth");
+	String hp	= request.getParameter("hp");
+	String addr		= request.getParameter("addr");
 	
 	//--------------------------------
 	// 데이터베이스 작업
@@ -24,12 +25,13 @@
 		Connection conn = DriverManager.getConnection(host, user, pass);
 
 		// 3) SQL 실행 객체 생성
-		String sql = "INSERT INTO `User1` VALUES (?,?,?,?)";
+		String sql = "INSERT INTO `User3` VALUES (?,?,?,?,?)";
 		PreparedStatement psmt = conn.prepareStatement(sql);
 		psmt.setString(1, userid);
 		psmt.setString(2, name);
-		psmt.setString(3, hp);
-		psmt.setString(4, age); // 21, '21'
+		psmt.setString(3, birth);
+		psmt.setString(4, hp);
+		psmt.setString(5, addr);
 
 		// 4) SQL 실행
 		psmt.executeUpdate();
@@ -43,5 +45,5 @@
 	}
 	
 	// 목록 이동
-	response.sendRedirect("/ch05/user1/list.jsp?register=success");
+	response.sendRedirect("/ch05/user3/list.jsp?register=success");
 %>

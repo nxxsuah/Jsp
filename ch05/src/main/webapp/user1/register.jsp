@@ -7,6 +7,7 @@
 	</head>
 	<body>
 		<h3>User1 등록</h3>
+		
 		<a href="/ch05/1_jdbc.jsp">메인</a>
 		<a href="/ch05/user1/list.jsp">목록</a>
 		

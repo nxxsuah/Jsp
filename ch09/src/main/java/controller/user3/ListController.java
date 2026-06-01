@@ -1,34 +1,42 @@
-package controller;
+package controller.user3;
 
 import java.io.IOException;
+import java.util.List;
 
+import dto.User3DTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.User3Service;
 
-@WebServlet("/hello.do")
-public class HelloController extends HttpServlet {
+@WebServlet("/user3/list.do")
+public class ListController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	private User3Service service = User3Service.getInstance();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// View 포워드(사용자에게 HTML 응답)
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/hello.jsp");
+	
+		List<User3DTO> dtoList = service.findAll();
+		System.out.println(dtoList);
+	
+		req.setAttribute("dtoList", dtoList);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user3/list.jsp");
 		dispatcher.forward(req, resp);
+	
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 	}
 
+
+	
 }
-
-
-
-
-
-

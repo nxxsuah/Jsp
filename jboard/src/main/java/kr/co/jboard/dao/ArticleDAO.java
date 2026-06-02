@@ -24,7 +24,8 @@ public class ArticleDAO extends DBHelper {
 		ArticleDTO dto = null;
 		
 		try {
-			conn = getConnection();						
+			conn = getConnection();		
+			
 			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
 			psmt.setString(1, ano);
 			

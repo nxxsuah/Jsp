@@ -24,8 +24,7 @@ public class ArticleDAO extends DBHelper {
 		ArticleDTO dto = null;
 		
 		try {
-			conn = getConnection();		
-			
+			conn = getConnection();						
 			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
 			psmt.setString(1, ano);
 			
@@ -43,8 +42,10 @@ public class ArticleDAO extends DBHelper {
 				dto.setWriter(rs.getString(8));
 				dto.setRegip(rs.getString(9));
 				dto.setWdate(rs.getString(10));
-			}			
+			}
+			
 			closeAll();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

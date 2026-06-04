@@ -10,21 +10,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/find/changePassword.do")
-public class ChanegePasswordController extends HttpServlet{
+public class ChangePasswordController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
+		
+		// View 포워드
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/find/changePassword.jsp");
-		dispatcher.forward(req, resp);
-		
-		
+		dispatcher.forward(req, resp);	
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
 	}
+	
+
 }

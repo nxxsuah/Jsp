@@ -18,6 +18,48 @@ public class UserDAO extends DBHelper {
 	
 	
 	// 기본 CRUD 메서드
+	
+	public int selectCount(String type, String value) {
+		
+		int count = 0;
+		
+		// SQL 생성
+		String sql = SQL.SELECT_COUNT_USER;
+		if(type.equals("userid")) {
+			sql += SQL.WHERE_USERID;			
+		}else if(type.equals("nick")) {
+			sql += SQL.WHERE_NICK;
+		}else if(type.equals("email")) {
+			sql += SQL.WHERE_EMAIL;
+		}else if(type.equals("hp")) {
+			sql += SQL.WHERE_HP;
+		}
+		
+		System.out.println(sql);
+		
+		try {
+			conn = getConnection();
+			
+			
+			psmt= conn.prepareStatement(sql);			
+			psmt.setString(1, value);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			closeAll();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return count;
+		
+	}
+	
+	
 	public UserDTO select(String userid) {
 		
 		// 반환용 DTO

@@ -3,7 +3,7 @@ package kr.co.jboard.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.jboard.dto.ArticleDTO;
+import kr.co.jboard.dto.FileDTO;
 import kr.co.jboard.util.DBHelper;
 import kr.co.jboard.util.SQL;
 
@@ -18,30 +18,20 @@ public class FileDAO extends DBHelper {
 	
 	
 	// 기본 CRUD 메서드
-	public ArticleDTO select(String ano) {
+	public FileDTO select(String fno) {
 		
 		// 반환용 DTO
-		ArticleDTO dto = null;
+		FileDTO dto = null;
 		
 		try {
 			conn = getConnection();						
-			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
-			psmt.setString(1, ano);
+			psmt = conn.prepareStatement(SQL.SELECT_FILE);
+			
 			
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				dto = new ArticleDTO();
-				dto.setAno(rs.getInt(1));
-				dto.setType(rs.getString(2));
-				dto.setTitle(rs.getString(3));
-				dto.setContent(rs.getString(4));
-				dto.setComment(rs.getInt(5));
-				dto.setFile(rs.getInt(6));
-				dto.setHit(rs.getInt(7));
-				dto.setWriter(rs.getString(8));
-				dto.setRegip(rs.getString(9));
-				dto.setWdate(rs.getString(10));
+				dto = new FileDTO();
 			}			
 			closeAll();
 		} catch (Exception e) {
@@ -50,45 +40,33 @@ public class FileDAO extends DBHelper {
 		return dto;
 	}
 	
-	public List<ArticleDTO> selectAll() {
+	public List<FileDTO> selectAll() {
 		
 		// 반환용 List
-		List<ArticleDTO> dtoList = new ArrayList<>();
+		List<FileDTO> dtoList = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(SQL.SELECT_ALL_ARTICLE);
+			rs = stmt.executeQuery(SQL.SELECT_ALL_FILE);
 			
 			while(rs.next()) {
-				ArticleDTO dto = new ArticleDTO();
-				dto.setAno(rs.getInt(1));
-				dto.setType(rs.getString(2));
-				dto.setTitle(rs.getString(3));
-				dto.setContent(rs.getString(4));
-				dto.setComment(rs.getInt(5));
-				dto.setFile(rs.getInt(6));
-				dto.setHit(rs.getInt(7));
-				dto.setWriter(rs.getString(8));
-				dto.setRegip(rs.getString(9));
-				dto.setWdate(rs.getString(10));
+				FileDTO dto = new FileDTO();
 				dtoList.add(dto);
 			}
+			
 			closeAll();
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dtoList;
 	}
 	
-	public void insert(ArticleDTO dto) {
+	public void insert(FileDTO dto) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.INSERT_ARTICLE);
-			psmt.setString(1, dto.getTitle());
-			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getWriter());
-			psmt.setString(4, dto.getRegip());
+			psmt = conn.prepareStatement(SQL.INSERT_FILE);
 			psmt.executeUpdate();
 			closeAll();
 		}catch (Exception e) {
@@ -96,13 +74,10 @@ public class FileDAO extends DBHelper {
 		}
 	}
 	
-	public void update(ArticleDTO dto) {
+	public void update(FileDTO dto) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE);
-			psmt.setString(1, dto.getTitle());
-			psmt.setString(2, dto.getContent());
-			psmt.setInt(3, dto.getAno());
+			psmt = conn.prepareStatement(SQL.UPDATE_FILE);
 			psmt.executeUpdate();
 			closeAll();
 		}catch (Exception e) {
@@ -110,11 +85,10 @@ public class FileDAO extends DBHelper {
 		}
 	}
 
-	public void delete(String ano) {
+	public void delete(String fno) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
-			psmt.setString(1, ano);
+			psmt = conn.prepareStatement(SQL.DELETE_FILE);
 			psmt.executeUpdate();
 			closeAll();
 		}catch (Exception e) {

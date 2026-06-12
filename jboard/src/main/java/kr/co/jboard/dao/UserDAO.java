@@ -17,16 +17,16 @@ public class UserDAO extends DBHelper {
 	private UserDAO() {}
 	
 	
-	// 기본 CRUD 메서드
-	
+	// 기본 CRUD 메서드	
 	public int selectCount(String type, String value) {
 		
 		int count = 0;
 		
 		// SQL 생성
 		String sql = SQL.SELECT_COUNT_USER;
+		
 		if(type.equals("userid")) {
-			sql += SQL.WHERE_USERID;			
+			sql += SQL.WHERE_USERID;
 		}else if(type.equals("nick")) {
 			sql += SQL.WHERE_NICK;
 		}else if(type.equals("email")) {
@@ -39,9 +39,7 @@ public class UserDAO extends DBHelper {
 		
 		try {
 			conn = getConnection();
-			
-			
-			psmt= conn.prepareStatement(sql);			
+			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, value);
 			
 			rs = psmt.executeQuery();
@@ -50,13 +48,10 @@ public class UserDAO extends DBHelper {
 				count = rs.getInt(1);
 			}
 			closeAll();
-			
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		return count;
-		
+		}		
+		return count;		
 	}
 	
 	
